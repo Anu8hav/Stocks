@@ -1,26 +1,234 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/* ================= THEME TOKENS ================= */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ================= ROOT COLORS ================= */
+
+:root {
+  --radius: 0.625rem;
+
+  /* Light mode (rare usage — still consistent) */
+  --background: oklch(0.97 0.01 0);
+  --foreground: oklch(0.2 0.02 0);
+
+  --card: oklch(0.95 0.01 0);
+  --card-foreground: oklch(0.2 0.02 0);
+
+  --popover: oklch(0.95 0.01 0);
+  --popover-foreground: oklch(0.2 0.02 0);
+
+  /* Deep red brand */
+  --primary: oklch(0.55 0.22 25);
+  --primary-foreground: oklch(0.98 0.01 0);
+
+  --secondary: oklch(0.9 0.01 0);
+  --secondary-foreground: oklch(0.25 0.02 0);
+
+  --muted: oklch(0.92 0.01 0);
+  --muted-foreground: oklch(0.5 0.02 0);
+
+  --accent: oklch(0.6 0.18 25);
+  --accent-foreground: oklch(0.98 0.01 0);
+
+  --destructive: oklch(0.6 0.24 25);
+
+  --border: oklch(0.85 0.01 0);
+  --input: oklch(0.85 0.01 0);
+  --ring: oklch(0.6 0.18 25);
+
+  /* Charts → red tonal palette */
+  --chart-1: oklch(0.6 0.22 25);
+  --chart-2: oklch(0.55 0.18 25);
+  --chart-3: oklch(0.45 0.16 25);
+  --chart-4: oklch(0.7 0.14 25);
+  --chart-5: oklch(0.8 0.12 25);
+
+  --sidebar: oklch(0.95 0.01 0);
+  --sidebar-foreground: oklch(0.25 0.02 0);
+  --sidebar-primary: oklch(0.55 0.22 25);
+  --sidebar-primary-foreground: oklch(0.98 0.01 0);
+  --sidebar-accent: oklch(0.9 0.01 0);
+  --sidebar-accent-foreground: oklch(0.25 0.02 0);
+  --sidebar-border: oklch(0.85 0.01 0);
+  --sidebar-ring: oklch(0.6 0.18 25);
+}
+
+/* ================= DARK MODE ================= */
+
+.dark {
+  --background: oklch(0.16 0.01 0); /* ~#1B1B1E */
+  --foreground: oklch(0.96 0.01 0);
+
+  --card: oklch(0.22 0.01 0);
+  --card-foreground: oklch(0.96 0.01 0);
+
+  --popover: oklch(0.22 0.01 0);
+  --popover-foreground: oklch(0.96 0.01 0);
+
+  --primary: oklch(0.6 0.22 25);
+  --primary-foreground: oklch(0.98 0.01 0);
+
+  --secondary: oklch(0.3 0.01 0);
+  --secondary-foreground: oklch(0.96 0.01 0);
+
+  --muted: oklch(0.3 0.01 0);
+  --muted-foreground: oklch(0.7 0.01 0);
+
+  --accent: oklch(0.5 0.18 25);
+  --accent-foreground: oklch(0.98 0.01 0);
+
+  --destructive: oklch(0.65 0.25 25);
+
+  --border: oklch(0.3 0.01 0);
+  --input: oklch(0.3 0.01 0);
+  --ring: oklch(0.55 0.18 25);
+
+  --sidebar: oklch(0.22 0.01 0);
+  --sidebar-foreground: oklch(0.96 0.01 0);
+  --sidebar-primary: oklch(0.6 0.22 25);
+  --sidebar-primary-foreground: oklch(0.98 0.01 0);
+  --sidebar-accent: oklch(0.3 0.01 0);
+  --sidebar-accent-foreground: oklch(0.96 0.01 0);
+  --sidebar-border: oklch(0.3 0.01 0);
+  --sidebar-ring: oklch(0.55 0.18 25);
+}
+
+/* ================= CUSTOM COLORS ================= */
+
+@theme {
+  --color-gray-900: #1B1B1E;
+  --color-gray-800: #222226;
+  --color-gray-700: #2A2A2E;
+  --color-gray-600: #35353B;
+  --color-gray-500: #6B6B73;
+  --color-gray-400: #B5B5BD;
+
+  --color-red-500: #D7263D;
+  --color-red-600: #B91F34;
+  --color-red-700: #8F1828;
+}
+
+/* ================= BASE ================= */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-gray-900 text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ================= UTILITIES ================= */
+
+@layer utilities {
+
+  .yellow-btn {
+    @apply h-12 cursor-pointer
+      bg-gradient-to-b from-red-500 to-red-600
+      hover:from-red-600 hover:to-red-500
+      text-white font-medium text-base
+      rounded-lg shadow-lg disabled:opacity-50;
+  }
+
+  .header { @apply bg-gray-800; }
+
+  .form-input,
+  .select-trigger,
+  .country-select-trigger {
+    @apply border-gray-600 bg-gray-800 text-white
+      focus:!border-red-500 focus:ring-0;
+  }
+
+  .footer-link { @apply hover:text-red-500; }
+  .search-btn { @apply bg-red-500 text-white hover:bg-red-600; }
+
+  .watchlist-btn { @apply bg-red-500 text-white hover:bg-red-600; }
+  .watchlist-remove { @apply bg-red-700 text-white; }
+
+  .add-alert {
+    @apply text-red-500 border-red-500/20;
+  }
+
+  .alert-name { @apply text-red-500; }
+
+  .news-cta { @apply text-red-500 hover:text-gray-400; }
+}
+
+/* ================= TRADINGVIEW FIXES ================= */
+
+.tradingview-widget-container,
+.tv-embed-widget-wrapper__body,
+.tradingview-widget-container__widget,
+.widget-stock-heatmap-container,
+.canvasContainer-tyaAU8aH {
+  background-color: #1B1B1E !important;
+}
+
+.custom-chart.tradingview-widget-container iframe {
+  border: 1px solid #2A2A2E;
+  border-radius: 8px !important;
+}
+
+/* ================= SCROLLBAR ================= */
+
+.scrollbar-hide-default:hover {
+  scrollbar-color: #2A2A2E transparent;
+}
+
+.scrollbar-hide-default:hover::-webkit-scrollbar-thumb {
+  background-color: #2A2A2E;
+}
+
+.scrollbar-hide-default::-webkit-scrollbar-thumb:hover {
+  background-color: #6B6B73;
 }
