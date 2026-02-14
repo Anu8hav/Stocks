@@ -203,6 +203,94 @@
 
   .news-cta { @apply text-red-500 hover:text-gray-400; }
 }
+  .container {
+    @apply mx-auto max-w-screen-2xl px-4 md:px-6 lg:px-8;
+  }
+
+  .home-wrapper {
+    @apply text-gray-400 flex-col gap-4 md:gap-10 items-center sm:items-start;
+  }
+
+  .home-section {
+    @apply w-full gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .header-wrapper {
+    @apply flex justify-between items-center px-6 py-4 text-gray-500;
+  }
+
+  .auth-layout {
+    @apply flex flex-col justify-between lg:flex-row h-screen bg-gray-900 relative overflow-hidden;
+  }
+
+  .auth-logo {
+    @apply pt-6 lg:pt-8 mb-8 lg:mb-12;
+  }
+
+  .auth-left-section {
+    @apply w-full lg:w-[45%] lg:h-screen px-6 lg:px-16 flex flex-col overflow-y-auto;
+  }
+
+  .auth-right-section {
+    @apply w-full max-lg:border-t max-lg:border-gray-600 lg:w-[55%] lg:h-screen bg-gray-800 px-6 py-4 md:p-6 lg:py-12 lg:px-18 flex flex-col justify-start;
+  }
+
+  .auth-blockquote {
+    @apply text-sm md:text-xl lg:text-2xl font-medium text-gray-400 mb-1 md:mb-6 lg:mb-8;
+  }
+
+  .auth-testimonial-author {
+    @apply text-xs md:text-lg font-bold text-gray-400 not-italic;
+  }
+
+  .auth-dashboard-preview {
+    @apply border-6 border-gray-800 left-0 hidden w-[1024px] h-auto max-w-none lg:block rounded-xl shadow-2xl;
+  }
+
+  .form-title {
+    @apply text-4xl font-bold text-gray-400 mb-10;
+  }
+
+  .form-label {
+    @apply text-sm font-medium text-gray-400;
+  }
+
+  .search-text {
+    @apply cursor-pointer hover:text-red-500;
+  }
+
+  .search-dialog {
+    @apply !bg-gray-800 lg:min-w-[800px] border-gray-600 fixed top-10 left-1/2 -translate-x-1/2 translate-y-10;
+  }
+
+  .search-field {
+    @apply !bg-gray-800 border-b border-gray-600 relative;
+  }
+
+  .search-list {
+    @apply !bg-gray-800 max-h-[400px];
+  }
+
+  .search-input {
+    @apply !bg-gray-800 border-0 text-gray-400 placeholder:text-gray-500 focus:ring-0 text-base h-14 pr-10;
+  }
+
+  .watchlist-container {
+    @apply flex flex-col-reverse lg:grid lg:grid-cols-3 gap-8;
+  }
+
+  .watchlist-title {
+    @apply text-xl md:text-2xl font-bold text-gray-100;
+  }
+
+  .news-item {
+    @apply bg-gray-800 rounded-lg border w-full border-gray-600 p-4 duration-200 hover:border-gray-600 cursor-pointer;
+  }
+
+  .alert-dialog {
+    @apply bg-gray-800 border-gray-600 text-gray-400 max-w-md;
+  }
+
 
 /* ================= TRADINGVIEW FIXES ================= */
 
