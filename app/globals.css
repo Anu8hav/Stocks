@@ -144,16 +144,16 @@
 /* ================= CUSTOM COLORS ================= */
 
 @theme {
-  --color-gray-900: #1B1B1E;
+  --color-gray-900: #1b1b1e;
   --color-gray-800: #222226;
-  --color-gray-700: #2A2A2E;
-  --color-gray-600: #35353B;
-  --color-gray-500: #6B6B73;
-  --color-gray-400: #B5B5BD;
+  --color-gray-700: #2a2a2e;
+  --color-gray-600: #35353b;
+  --color-gray-500: #6b6b73;
+  --color-gray-400: #b5b5bd;
 
-  --color-red-500: #D7263D;
-  --color-red-600: #B91F34;
-  --color-red-700: #8F1828;
+  --color-red-500: #d7263d;
+  --color-red-600: #b91f34;
+  --color-red-700: #8f1828;
 }
 
 /* ================= BASE ================= */
@@ -171,7 +171,6 @@
 /* ================= UTILITIES ================= */
 
 @layer utilities {
-
   .yellow-btn {
     @apply h-12 cursor-pointer
       bg-gradient-to-b from-red-500 to-red-600
@@ -180,7 +179,9 @@
       rounded-lg shadow-lg disabled:opacity-50;
   }
 
-  .header { @apply bg-gray-800; }
+  .header {
+    @apply bg-gray-800;
+  }
 
   .form-input,
   .select-trigger,
@@ -189,20 +190,31 @@
       focus:!border-red-500 focus:ring-0;
   }
 
-  .footer-link { @apply hover:text-red-500; }
-  .search-btn { @apply bg-red-500 text-white hover:bg-red-600; }
+  .footer-link {
+    @apply hover:text-red-500;
+  }
+  .search-btn {
+    @apply bg-red-500 text-white hover:bg-red-600;
+  }
 
-  .watchlist-btn { @apply bg-red-500 text-white hover:bg-red-600; }
-  .watchlist-remove { @apply bg-red-700 text-white; }
+  .watchlist-btn {
+    @apply bg-red-500 text-white hover:bg-red-600;
+  }
+  .watchlist-remove {
+    @apply bg-red-700 text-white;
+  }
 
   .add-alert {
     @apply text-red-500 border-red-500/20;
   }
 
-  .alert-name { @apply text-red-500; }
+  .alert-name {
+    @apply text-red-500;
+  }
 
-  .news-cta { @apply text-red-500 hover:text-gray-400; }
-}
+  .news-cta {
+    @apply text-red-500 hover:text-gray-400;
+  }
   .container {
     @apply mx-auto max-w-screen-2xl px-4 md:px-6 lg:px-8;
   }
@@ -214,7 +226,11 @@
   .home-section {
     @apply w-full gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
   }
-
+  .custom-chart {
+    border: 1px solid #2a2a2e;
+    border-radius: 8px;
+    overflow: hidden;
+  }
   .header-wrapper {
     @apply flex justify-between items-center px-6 py-4 text-gray-500;
   }
@@ -290,7 +306,7 @@
   .alert-dialog {
     @apply bg-gray-800 border-gray-600 text-gray-400 max-w-md;
   }
-
+}
 
 /* ================= TRADINGVIEW FIXES ================= */
 
@@ -299,24 +315,24 @@
 .tradingview-widget-container__widget,
 .widget-stock-heatmap-container,
 .canvasContainer-tyaAU8aH {
-  background-color: #1B1B1E !important;
+  background-color: #1b1b1e !important;
 }
 
 .custom-chart.tradingview-widget-container iframe {
-  border: 1px solid #2A2A2E;
+  border: 1px solid #2a2a2e;
   border-radius: 8px !important;
 }
 
 /* ================= SCROLLBAR ================= */
 
 .scrollbar-hide-default:hover {
-  scrollbar-color: #2A2A2E transparent;
+  scrollbar-color: #2a2a2e transparent;
 }
 
 .scrollbar-hide-default:hover::-webkit-scrollbar-thumb {
-  background-color: #2A2A2E;
+  background-color: #2a2a2e;
 }
 
 .scrollbar-hide-default::-webkit-scrollbar-thumb:hover {
-  background-color: #6B6B73;
+  background-color: #6b6b73;
 }
