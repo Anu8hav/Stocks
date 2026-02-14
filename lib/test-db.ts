@@ -1,7 +1,7 @@
 /**
  * Database Connection Test
  * Run this file to test your MongoDB connection
- * 
+ *
  * Usage: npx ts-node lib/test-db.ts
  * or: node -r ts-node/register lib/test-db.ts
  */
@@ -22,7 +22,9 @@ async function testDatabaseConnection() {
   if (!MONGO_URI) {
     console.error("❌ MONGO_URI is not defined in .env file");
     console.log("\n📝 Fix: Add MONGO_URI to your .env.local file:");
-    console.log("   MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname");
+    console.log(
+      "   MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname",
+    );
     process.exit(1);
   }
   console.log("✅ MONGO_URI found");
@@ -45,7 +47,9 @@ async function testDatabaseConnection() {
     console.log(`   Host: ${mongoose.connection.host}`);
     console.log(`   Port: ${mongoose.connection.port}`);
     console.log(`   Database: ${mongoose.connection.name}`);
-    console.log(`   State: ${mongoose.connection.readyState === 1 ? "Connected" : "Disconnected"}\n`);
+    console.log(
+      `   State: ${mongoose.connection.readyState === 1 ? "Connected" : "Disconnected"}\n`,
+    );
 
     // Step 5: Test a simple operation
     console.log("Step 5: Testing database operations...");
@@ -60,7 +64,9 @@ async function testDatabaseConnection() {
     if (admin) {
       const databases = await admin.listDatabases();
       databases.databases.slice(0, 5).forEach((db) => {
-        const size = db.sizeOnDisk ? (db.sizeOnDisk / 1024 / 1024).toFixed(2) : "0";
+        const size = db.sizeOnDisk
+          ? (db.sizeOnDisk / 1024 / 1024).toFixed(2)
+          : "0";
         console.log(`   - ${db.name} (${size} MB)`);
       });
       if (databases.databases.length > 5) {
@@ -68,7 +74,9 @@ async function testDatabaseConnection() {
       }
     }
 
-    console.log("\n✅ All tests passed! Your database connection is working correctly.");
+    console.log(
+      "\n✅ All tests passed! Your database connection is working correctly.",
+    );
   } catch (error) {
     console.error("❌ Connection failed!\n");
     if (error instanceof Error) {
@@ -83,7 +91,9 @@ async function testDatabaseConnection() {
         console.log("  - Verify you're using the correct connection string");
       } else if (error.message.includes("IP whitelist")) {
         console.log("  - Add your IP address to MongoDB Atlas IP whitelist");
-        console.log("  - Go to: https://cloud.mongodb.com > Security > Network Access");
+        console.log(
+          "  - Go to: https://cloud.mongodb.com > Security > Network Access",
+        );
       }
     }
     process.exit(1);
