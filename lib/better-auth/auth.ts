@@ -17,12 +17,12 @@ export const getAuth = async () => {
     database: mongodbAdapter(db as any),
     secret: process.env.BETTER_AUTH_SECRET,
     baseURL: process.env.BETTER_AUTH_BASE_URL,
-    emailandpassword: {
+    emailAndPassword: {
       enabled: true,
       disableSignUp: false,
       requiredEmailVerification: false,
       minPasswordLength: 8,
-      MaxPasswordLength: 128,
+      maxPasswordLength: 128,
       autoSignIn: true,
     },
     plugins: [nextCookies()],

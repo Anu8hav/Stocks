@@ -18,25 +18,21 @@ export const sendSignUpEmail = inngest.createFunction(
     );
 
     const response = await step.ai.infer("generate-welcome-intro", {
-      model: step.ai.models.gemini({ model: "gemini-3.5-pro" }),
+      model: step.ai.models.gemini({ model: "gemini-2.5-flash-lite" }),
       body: {
         contents: [
           {
             role: "user",
-            parts: [
-              {
-                text: prompt,
-              },
-            ],
+            parts: [{ text: prompt }],
           },
         ],
       },
     });
-    await step.run("sen-welcome-email", async () => {
+    await step.run("send-welcome-email", async () => {
       const part = response.candidates?.[0]?.content?.parts?.[0];
       const introText =
         (part && "text" in part ? part.text : null) ||
-        "Welcome to our stock trading app! We are thrilled to have you on board. Our app is designed to provide you with personalized stock recommendations, real-time market insights, and a seamless trading experience. Whether you're a seasoned investor or just starting out, we're here to help you achieve your financial goals. If you have any questions or need assistance, feel free to reach out to our support team. Happy trading!";
+        "Thanks for joining Stock tracker. You now have the tools to track markets and make smarter moves.";
     });
   },
 );
