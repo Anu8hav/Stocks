@@ -5,11 +5,11 @@ import InputField from "@/components/forms/InputField";
 import { Button } from "@/components/ui/button";
 import { signInWithEmail } from "@/lib/actions/auth.actions";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const SignIn = () => {
+const SignInForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackURL = searchParams.get("callbackUrl") || "/";
@@ -90,6 +90,14 @@ const SignIn = () => {
         />
       </form>
     </>
+  );
+};
+
+const SignIn = () => {
+  return (
+    <Suspense fallback={<div className="form-title">Loading...</div>}>
+      <SignInForm />
+    </Suspense>
   );
 };
 

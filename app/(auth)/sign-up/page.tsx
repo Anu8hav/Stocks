@@ -15,8 +15,9 @@ import FooterLink from "@/components/forms/FooterLink";
 import { signUpWithEmail } from "@/lib/actions/auth.actions";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+import { Suspense } from "react";
 
-const SignUp = () => {
+const SignUpForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackURL = searchParams.get("callbackUrl") || "/";
@@ -155,4 +156,13 @@ const SignUp = () => {
     </>
   );
 };
+
+const SignUp = () => {
+  return (
+    <Suspense fallback={<div className="form-title">Loading...</div>}>
+      <SignUpForm />
+    </Suspense>
+  );
+};
+
 export default SignUp;
