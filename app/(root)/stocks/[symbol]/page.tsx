@@ -102,13 +102,18 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
   ]);
 
   const companyName = data.profile?.name || normalizedSymbol;
-  const quote = data.quote;
+  const quote = data.quote || {};
   const metrics = data.metrics?.metric;
 
+  const q = quote as any;
+  const dp = q?.dp;
+  const dc = q?.c;
+  const dd = q?.d;
+  
   const changeClass =
-    (quote?.dp || 0) > 0
+    (dp || 0) > 0
       ? "text-green-500"
-      : (quote?.dp || 0) < 0
+      : (dp || 0) < 0
         ? "text-red-500"
         : "text-gray-400";
 
@@ -123,7 +128,7 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
     "peNormalizedAnnual",
   ]);
 
-  const volume = quote?.t
+  const volume = q?.t
     ? metricValue(metrics, [
         "10DayAverageTradingVolume",
         "3MonthAverageTradingVolume",
@@ -182,10 +187,10 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
 
             <div className="flex flex-wrap items-end gap-3">
               <p className="text-3xl font-bold text-gray-100">
-                {formatCurrency(quote?.c)}
+                {formatCurrency(dc)}
               </p>
               <p className={`text-lg font-medium ${changeClass}`}>
-                {formatCurrency(quote?.d)} ({formatPercent(quote?.dp)})
+                {formatCurrency(dd)} ({formatPercent(dp)})
               </p>
             </div>
 
