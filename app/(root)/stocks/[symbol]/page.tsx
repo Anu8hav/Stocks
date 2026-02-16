@@ -11,6 +11,7 @@ import {
 } from "@/lib/actions/watchlist.actions";
 import { formatTimeAgo } from "@/lib/utils";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -163,11 +164,24 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
       <section className="rounded-lg border border-gray-600 bg-gray-800 p-5 md:p-6">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-3">
-            <div>
-              <p className="text-sm text-gray-400">{normalizedSymbol}</p>
-              <h1 className="text-2xl font-semibold text-gray-100 md:text-3xl">
-                {companyName}
-              </h1>
+            <div className="flex items-center gap-4">
+              {data.profile?.logo && (
+                <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-white p-2">
+                  <Image
+                    src={data.profile.logo}
+                    alt={`${companyName} logo`}
+                    fill
+                    className="object-contain"
+                    sizes="64px"
+                  />
+                </div>
+              )}
+              <div>
+                <p className="text-sm text-gray-400">{normalizedSymbol}</p>
+                <h1 className="text-2xl font-semibold text-gray-100 md:text-3xl">
+                  {companyName}
+                </h1>
+              </div>
             </div>
 
             <div className="flex flex-wrap items-end gap-3">
@@ -231,7 +245,7 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
 
       <StockChartPanel symbol={normalizedSymbol} />
 
-  <StockAnalysisPanel symbol={normalizedSymbol} />
+      <StockAnalysisPanel symbol={normalizedSymbol} />
 
       <section className="grid gap-5 lg:grid-cols-2">
         <article className="rounded-lg border border-gray-600 bg-gray-800 p-5">
