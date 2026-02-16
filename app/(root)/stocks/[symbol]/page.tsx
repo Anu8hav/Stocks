@@ -102,7 +102,7 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
   ]);
 
   const companyName = data.profile?.name || normalizedSymbol;
-  const quote = data.quote ?? {};
+  const quote = data.quote;
   const metrics = data.metrics?.metric;
 
   const changeClass =
