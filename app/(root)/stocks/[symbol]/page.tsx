@@ -166,13 +166,13 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
           <div className="space-y-3">
             <div className="flex items-center gap-4">
               {data.profile?.logo && (
-                <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-white p-2">
+                <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-white p-3">
                   <Image
                     src={data.profile.logo}
                     alt={`${companyName} logo`}
                     fill
                     className="object-contain"
-                    sizes="64px"
+                    sizes="96px"
                   />
                 </div>
               )}

@@ -12,9 +12,9 @@ const Header = ({ user }: { user: User }) => {
           <Image
             src="/assets/icons/logo.svg"
             alt="Stocks Logo"
-            width={140}
-            height={32}
-            className="h-8 w-auto cursor-pointer"
+            width={210}
+            height={50}
+            className="h-12 w-auto cursor-pointer"
           />
         </Link>
         <nav className="hidden sm:block">
