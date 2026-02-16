@@ -4,15 +4,9 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -22,6 +16,7 @@ import NavItems from "@/components/NavItems";
 
 const UserDropdown = () => {
   const router = useRouter();
+  const userInitial = user.name?.trim()?.charAt(0)?.toUpperCase() || "U";
 
   const hadnleSignout = async () => {
     router.push("/sign-in");
@@ -37,9 +32,9 @@ const UserDropdown = () => {
           className="flex items-center gap-3 text-gray-4 hover:text-red-500"
         >
           <Avatar className="h-8 w-8">
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src={user.image || undefined} />
             <AvatarFallback className="bg-red-500 text-red-900 text-sm font-bold">
-              {user.name[0]}
+              {userInitial}
             </AvatarFallback>
           </Avatar>
           <div className="hidden md:flex flex-col items-start">
@@ -53,9 +48,9 @@ const UserDropdown = () => {
         <DropdownMenuLabel>
           <div className="flex relative items-center gap-3 py-2">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage src={user.image || undefined} />
               <AvatarFallback className="bg-red-500 text-red-900 text-sm font-bold">
-                {user.name[0]}
+                {userInitial}
               </AvatarFallback>
             </Avatar>
             <div className="flex flex-col ">

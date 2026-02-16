@@ -16,6 +16,25 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Authentication (Better Auth + Google OAuth)
+
+1. Copy `.env.example` to `.env` and set all values.
+2. In Google Cloud Console → Credentials → OAuth Client ID (Web application):
+   - Authorized JavaScript origins: `http://localhost:3000`
+   - Authorized redirect URI (local): `http://localhost:3000/api/auth/callback/google`
+   - Authorized redirect URI (prod): `https://your-domain.com/api/auth/callback/google`
+3. Ensure these env vars are set:
+   - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+   - `BETTER_AUTH_SECRET` (or `NEXTAUTH_SECRET` fallback)
+   - `BETTER_AUTH_BASE_URL` (or `BETTER_AUTH_URL` / `NEXTAUTH_URL` fallback)
+   - `NEXT_PUBLIC_BETTER_AUTH_BASE_URL` (usually `http://localhost:3000/api/auth`)
+
+Notes:
+
+- Better Auth handles OAuth state/CSRF protection and PKCE internally for OAuth flows.
+- Social sign-in records are persisted in Mongo collections through the Better Auth adapter.
+- Google account linkage is handled via Better Auth's `account` records keyed by provider/provider account ID.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
