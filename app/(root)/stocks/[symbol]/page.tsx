@@ -147,9 +147,16 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
         100
       : undefined;
 
-  const watchlistAction = inWatchlist
-    ? removeStockFromWatchlist.bind(null, normalizedSymbol)
-    : addStockToWatchlist.bind(null, normalizedSymbol, companyName);
+  const watchlistAction = async () => {
+    "use server";
+
+    if (inWatchlist) {
+      await removeStockFromWatchlist(normalizedSymbol);
+      return;
+    }
+
+    await addStockToWatchlist(normalizedSymbol, companyName);
+  };
 
   return (
     <div className="space-y-8">

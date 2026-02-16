@@ -67,12 +67,18 @@ declare global {
         intro: string;
     };
 
-        type User = {
-                id: string;
-                name: string;
-                email: string;
-                image?: string | null;
-        };
+    type User = {
+        id: string;
+        name: string;
+        email: string;
+        image?: string | null;
+    };
+
+    type UserForNewsEmail = {
+        id: string;
+        email: string;
+        name: string;
+    };
 
     type Stock = {
         symbol: string;

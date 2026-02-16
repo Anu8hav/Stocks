@@ -6,7 +6,7 @@ import {
 import { sendNewsSummaryEmail, sendWelcomeEmail } from "@/lib/nodemailer";
 import { getAllUsersForNewsEmail } from "@/lib/actions/user.actions";
 import { getWatchlistSymbolsByEmail } from "@/lib/actions/watchlist.actions";
-import { getNews } from "@/lib/actions/finnhub.actions";
+import { getNews } from "@/lib/actions/finnhub.action";
 import { getFormattedTodayDate } from "@/lib/utils";
 
 export const sendSignUpEmail = inngest.createFunction(
