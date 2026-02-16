@@ -53,7 +53,7 @@ export async function getNews(
             const articles = await fetchJSON<RawNewsArticle[]>(url, 300);
             perSymbolArticles[sym] = (articles || []).filter(validateArticle);
           } catch (e) {
-            console.error("Error fetching company news for", sym, e);
+            // Silently handle errors (e.g., 403 for unsupported stocks)
             perSymbolArticles[sym] = [];
           }
         }),

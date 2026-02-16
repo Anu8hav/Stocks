@@ -101,12 +101,8 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
     isSymbolInWatchlist(normalizedSymbol),
   ]);
 
-  if (!data.quote && !data.profile) {
-    notFound();
-  }
-
   const companyName = data.profile?.name || normalizedSymbol;
-  const quote = data.quote;
+  const quote = data.quote ?? {};
   const metrics = data.metrics?.metric;
 
   const changeClass =
