@@ -12,6 +12,7 @@ import { Loader2, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { searchStocks } from "@/lib/actions/finnhub.action";
 import { useDebounce } from "@/hooks/useDebounce";
+import { normalizeToAPI } from "@/lib/symbolMapper";
 
 /* ---------- Default Popular Stocks ---------- */
 const DEFAULT_POPULAR_STOCKS: StockWithWatchlistStatus[] = [
@@ -205,7 +206,7 @@ export default function SearchCommand({
               {displayStocks.map((stock) => (
                 <li key={stock.symbol}>
                   <Link
-                    href={`/stocks/${stock.symbol}`}
+                    href={`/stocks/${normalizeToAPI(stock.symbol)}`}
                     onClick={handleSelectStock}
                     className="search-item-link"
                   >
@@ -213,7 +214,7 @@ export default function SearchCommand({
                     <div>
                       <div>{stock.name}</div>
                       <div className="text-sm text-gray-500">
-                        {stock.symbol} | {stock.exchange} | {stock.type}
+                        {normalizeToAPI(stock.symbol)} | {stock.exchange} | {stock.type}
                       </div>
                     </div>
                   </Link>

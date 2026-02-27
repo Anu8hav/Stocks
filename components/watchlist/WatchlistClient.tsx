@@ -18,6 +18,7 @@ import {
   removeStockFromWatchlist,
 } from "@/lib/actions/watchlist.actions";
 import { getWatchlistQuoteSnapshots } from "@/lib/actions/finnhub.action";
+import { normalizeToAPI } from "@/lib/symbolMapper";
 import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { toast } from "sonner";
@@ -78,7 +79,7 @@ const WatchlistClient = ({
     let cancelled = false;
 
     const refreshQuotes = async () => {
-      const symbols = stocks.map((stock) => stock.symbol);
+      const symbols = stocks.map((stock) => normalizeToAPI(stock.symbol));
       try {
         const snapshots = await getWatchlistQuoteSnapshots(symbols);
         if (cancelled || snapshots.length === 0) return;
@@ -168,7 +169,7 @@ const WatchlistClient = ({
   const optimisticAdd = (
     stock: Pick<WatchlistStock, "symbol" | "name" | "sector">,
   ) => {
-    const normalized = stock.symbol.trim().toUpperCase();
+    const normalized = normalizeToAPI(stock.symbol);
     if (!normalized) return;
 
     if (stocks.some((item) => item.symbol === normalized)) {
@@ -300,7 +301,7 @@ const WatchlistClient = ({
   };
 
   const handleShare = async () => {
-    const symbols = stocks.map((stock) => stock.symbol).join(",");
+    const symbols = stocks.map((stock) => normalizeToAPI(stock.symbol)).join(",");
     const url = `${window.location.origin}/watchlist?symbols=${encodeURIComponent(symbols)}`;
 
     try {

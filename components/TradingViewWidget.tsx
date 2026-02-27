@@ -1,12 +1,13 @@
 "use client";
 import useTradingViewWidget from "@/hooks/useTradingViewWidget";
+import { TradingViewWidgetConfig } from "@/lib/symbolMapper";
 import { cn } from "@/lib/utils";
 import React, { memo } from "react";
 
 interface TradingViewWidgetProps {
   title?: string;
   scriptUrl: string;
-  config: Record<string, unknown>;
+  config: TradingViewWidgetConfig;
   height?: number;
   className?: string;
 }

@@ -1,5 +1,6 @@
 import StockChartPanel from "@/components/stocks/StockChartPanel";
 import StockAnalysisPanel from "@/components/stocks/StockAnalysisPanel";
+import { FALLBACK_API_SYMBOL, normalizeSymbol, normalizeToAPI } from "@/lib/symbolMapper";
 import {
   getStockDetails,
   type StockDetailPayload,
@@ -68,7 +69,7 @@ export async function generateMetadata({
   params,
 }: StockSymbolPageProps): Promise<Metadata> {
   const { symbol } = await params;
-  const normalizedSymbol = symbol.toUpperCase();
+  const normalizedSymbol = normalizeSymbol(symbol).apiSymbol || FALLBACK_API_SYMBOL;
 
   try {
     const data = await getStockDetails(normalizedSymbol);
@@ -92,7 +93,8 @@ export async function generateMetadata({
 
 const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
   const { symbol } = await params;
-  const normalizedSymbol = symbol?.trim().toUpperCase();
+  const normalized = normalizeSymbol(symbol);
+  const normalizedSymbol = normalized.apiSymbol || FALLBACK_API_SYMBOL;
 
   if (!normalizedSymbol) notFound();
 
@@ -431,7 +433,7 @@ const StockSymbolPage = async ({ params }: StockSymbolPageProps) => {
                 return (
                   <Link
                     key={peer.symbol}
-                    href={`/stocks/${peer.symbol}`}
+                    href={`/stocks/${normalizeToAPI(peer.symbol)}`}
                     className="flex items-center justify-between rounded-md bg-gray-700 p-3 transition hover:bg-gray-600"
                   >
                     <div>

@@ -1,6 +1,8 @@
 "use client";
 
 import TradingViewWidget from "@/components/TradingViewWidget";
+import TradingViewBoundary from "@/components/TradingViewBoundary";
+import { normalizeSymbol } from "@/lib/symbolMapper";
 import { useMemo, useState } from "react";
 
 type Timeframe = "1D" | "1W" | "1M" | "3M" | "1Y" | "5Y";
@@ -50,6 +52,10 @@ const StockChartPanel = ({ symbol }: StockChartPanelProps) => {
     Array<keyof typeof indicatorMap>
   >([]);
 
+  const normalized = useMemo(() => normalizeSymbol(symbol), [symbol]);
+  const tradingViewSymbol = normalized.tradingViewSymbol;
+  const labelSymbol = normalized.apiSymbol;
+
   const config = useMemo(() => {
     const studies = [
       "Volume@tv-basicstudies",
@@ -70,7 +76,7 @@ const StockChartPanel = ({ symbol }: StockChartPanelProps) => {
       locale: "en",
       save_image: false,
       style: styleByChartType[chartType],
-      symbol: symbol.toUpperCase(),
+      symbol: tradingViewSymbol,
       theme: "dark",
       timezone: "Etc/UTC",
       backgroundColor: "#141414",
@@ -82,7 +88,7 @@ const StockChartPanel = ({ symbol }: StockChartPanelProps) => {
       width: "100%",
       height: 540,
     };
-  }, [chartType, selectedIndicators, symbol, timeframe]);
+  }, [chartType, selectedIndicators, timeframe, tradingViewSymbol]);
 
   const toggleIndicator = (indicator: keyof typeof indicatorMap) => {
     setSelectedIndicators((current) =>
@@ -156,13 +162,15 @@ const StockChartPanel = ({ symbol }: StockChartPanelProps) => {
         })}
       </div>
 
-      <TradingViewWidget
-        title={`${symbol.toUpperCase()} Chart`}
-        scriptUrl={SCRIPT_URL}
-        config={config}
-        className="custom-chart"
-        height={540}
-      />
+      <TradingViewBoundary>
+        <TradingViewWidget
+          title={`${labelSymbol} Chart`}
+          scriptUrl={SCRIPT_URL}
+          config={config}
+          className="custom-chart"
+          height={540}
+        />
+      </TradingViewBoundary>
     </section>
   );
 };

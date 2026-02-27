@@ -1,6 +1,8 @@
 "use client";
 
 import TradingViewWidget from "@/components/TradingViewWidget";
+import TradingViewBoundary from "@/components/TradingViewBoundary";
+import { normalizeSymbol } from "@/lib/symbolMapper";
 import {
   Select,
   SelectContent,
@@ -18,10 +20,11 @@ const SCRIPT_URL =
   "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
 
 const WatchlistAnalysisPanel = ({ symbols }: WatchlistAnalysisPanelProps) => {
-  const uniqueSymbols = useMemo(
-    () => Array.from(new Set(symbols.map((symbol) => symbol.toUpperCase()))),
-    [symbols],
-  );
+  const uniqueSymbols = useMemo(() => {
+    return Array.from(
+      new Set(symbols.map((symbol) => normalizeSymbol(symbol).apiSymbol)),
+    );
+  }, [symbols]);
 
   const [selectedSymbol, setSelectedSymbol] = useState(
     uniqueSymbols[0] || "AAPL",
@@ -38,19 +41,21 @@ const WatchlistAnalysisPanel = ({ symbols }: WatchlistAnalysisPanelProps) => {
     }
   }, [uniqueSymbols, selectedSymbol]);
 
+  const normalized = useMemo(() => normalizeSymbol(selectedSymbol), [selectedSymbol]);
+
   const config = useMemo(
     () => ({
       interval: "1h",
       width: "100%",
       isTransparent: true,
       height: 420,
-      symbol: selectedSymbol,
+      symbol: normalized.tradingViewSymbol,
       showIntervalTabs: true,
       displayMode: "single",
       locale: "en",
       colorTheme: "dark",
     }),
-    [selectedSymbol],
+    [normalized.tradingViewSymbol],
   );
 
   return (
@@ -74,12 +79,14 @@ const WatchlistAnalysisPanel = ({ symbols }: WatchlistAnalysisPanelProps) => {
         </Select>
       </div>
 
-      <TradingViewWidget
-        scriptUrl={SCRIPT_URL}
-        config={config}
-        className="custom-chart"
-        height={420}
-      />
+      <TradingViewBoundary>
+        <TradingViewWidget
+          scriptUrl={SCRIPT_URL}
+          config={config}
+          className="custom-chart"
+          height={420}
+        />
+      </TradingViewBoundary>
     </section>
   );
 };

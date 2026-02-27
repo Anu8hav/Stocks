@@ -4,6 +4,7 @@ import { WatchlistStock, WatchlistView } from "@/components/watchlist/types";
 import { Button } from "@/components/ui/button";
 import { BarChart3, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { normalizeToAPI } from "@/lib/symbolMapper";
 
 const formatCurrency = (value?: number) => {
   if (!Number.isFinite(value)) return "N/A";
@@ -88,7 +89,7 @@ const WatchlistItem = ({
           />
           <div>
             <Link
-              href={`/stocks/${stock.symbol}`}
+              href={`/stocks/${normalizeToAPI(stock.symbol)}`}
               className="text-lg font-semibold text-gray-100 hover:text-red-500"
             >
               {stock.symbol}
