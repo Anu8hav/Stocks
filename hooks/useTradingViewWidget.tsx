@@ -17,9 +17,13 @@ const useTradingViewWidget = (
     if (!containerRef.current) return;
     if (containerRef.current.dataset.loaded) return;
 
-    const shouldNormalize = typeof config.symbol === "string" && config.symbol.length > 0;
-    const normalized = shouldNormalize
-      ? normalizeSymbol(config.symbol, {
+    const symbolInput =
+      typeof config.symbol === "string" && config.symbol.length > 0
+        ? config.symbol
+        : undefined;
+
+    const normalized = symbolInput
+      ? normalizeSymbol(symbolInput, {
           fallbackTradingViewSymbol: FALLBACK_TRADINGVIEW_SYMBOL,
         })
       : null;
@@ -32,7 +36,7 @@ const useTradingViewWidget = (
       });
     }
 
-    const widgetConfig = shouldNormalize && normalized
+    const widgetConfig = symbolInput && normalized
       ? { ...config, symbol: normalized.tradingViewSymbol }
       : config;
 
